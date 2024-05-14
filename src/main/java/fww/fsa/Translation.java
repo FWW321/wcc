@@ -32,4 +32,12 @@ public class Translation {
         Translation that = (Translation) obj;
         return c == that.c && Objects.equals(nextStatus, that.nextStatus);
     }
+
+//    @Override
+//    public String toString() {
+//        return "Translation{" +
+//                "c=" + c +
+//                ", nextStatus=" + nextStatus +
+//                '}';
+//    }
 }

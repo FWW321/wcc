@@ -3,28 +3,18 @@ package fww.fsa;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 public class Status {
 
-    private String id = "";
+    private final String id;
 
     private Set<Translation> translations = new HashSet<>();
 
-    public Status(){
-    }
+    boolean isFinal = false;
 
-    public Status(String id) {
-        this.id = id;
-    }
-
-    public Status(Status status){
-        this.id = status.getId();
-        this.translations = status.getTranslations();
-    }
-
-    public Status(String id, Set<Translation> translation) {
-        this.id = id;
-        this.translations = translation;
+    public Status() {
+        this.id = UUID.randomUUID().toString();
     }
 
     public void addTranslation(Translation translation) {
@@ -80,19 +70,15 @@ public class Status {
     }
 
     public boolean isFinal() {
-        return id.equals("final");
+        return isFinal;
+    }
+
+    public void notFinal() {
+        isFinal = false;
     }
 
     public void setFinal() {
-        id = "final";
-    }
-
-    public void setInitial() {
-        id = "initial";
-    }
-
-    public boolean isInitial() {
-        return id.equals("initial");
+        isFinal = true;
     }
 
     public Set<Status> getNextStatusN(char c) {
@@ -113,12 +99,6 @@ public class Status {
         return translations;
     }
 
-    public void setId(String id) {
-        if(id.equals("final") || id.equals("initial"))
-            throw new IllegalArgumentException("要设置开始或结束状态请使用setFinal或setInitial方法" );
-        this.id = id;
-    }
-
     public void setTranslations(Set<Translation> translations) {
         this.translations = translations;
     }
@@ -135,4 +115,13 @@ public class Status {
         Status that = (Status) obj;
         return Objects.equals(id, that.id);
     }
+
+//    @Override
+//    public String toString() {
+//        return "Status{" +
+//                "id='" + id + '\'' +
+//                ", translations=" + translations +
+//                ", isFinal=" + isFinal +
+//                '}';
+//    }
 }
