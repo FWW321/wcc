@@ -2,32 +2,23 @@ package fww.fsa;
 
 import java.util.*;
 
-public class NFA {
-    private Status startStatus;
-
-    private Status finalStatus;
-
+public class NFA extends FA{
 
     public NFA(String regex) {
-        NFA nfa = builder(regex);
-        this.startStatus = nfa.startStatus;
-        this.finalStatus = nfa.finalStatus;
+        super(regex);
     }
 
     private NFA(Status startStatus, Status finalStatus){
-        this.startStatus = startStatus;
-        this.finalStatus = finalStatus;
+        super(startStatus, finalStatus);
     }
 
     private NFA(NFA n){
+        super(n);
         if(n == null){
             startStatus = new Status();
             finalStatus = new Status();
             startStatus.addTranslation(new Translation(' ', finalStatus));
             finalStatus.setFinal();
-        }else{
-            startStatus = n.startStatus;
-            finalStatus = n.finalStatus;
         }
     }
 
@@ -37,27 +28,12 @@ public class NFA {
         finalStatus.setFinal();
     }
 
-    public void setStartStatus(Status startStatus){
-        this.startStatus = startStatus;
-    }
-
-    public void setFinalStatus(Status finalStatus){
-        this.finalStatus = finalStatus;
-    }
-
-    public Status getStartStatus() {
-        return startStatus;
-    }
-
-    public Status getFinalStatus(){
-        return finalStatus;
-    }
-
-    private NFA builder(String regex){
+    @Override
+    protected NFA builder(String regex){
         List<NFA> concat = new ArrayList<>();
         char[] chars = regex.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            NFA nfa;
+            NFA nfa = null;
             char c = chars[i];
             if (c == '(') {
                 int j = i + 1;
@@ -91,6 +67,11 @@ public class NFA {
                 NFA n = concat.getLast();
                 concat.removeLast();
                 nfa = questionRule(n);
+            } else if (c == '\\') {
+                if(i < chars.length - 1){
+                    nfa = baseRule(chars[i + 1]);
+                }
+                i = i + 1;
             } else {
                 nfa = baseRule(c);
                 System.out.println(nfa);
@@ -100,7 +81,6 @@ public class NFA {
         }
         System.out.println(concat);
         return concat(concat);
-//        return concatRule(concatRule(concat.get(0), concat.get(1)), concat.get(2));
     }
 
     private NFA baseRule(char c){
@@ -171,6 +151,11 @@ public class NFA {
         return s;
     }
 
+    protected void lookahead(){
+
+    }
+
+    @Override
     public boolean match(String s){
         Set<Status> status = getNILTranslation(startStatus);
         if(isFinal(status)){
@@ -227,16 +212,8 @@ public class NFA {
         return status.stream().anyMatch(Status::isFinal);
     }
 
-//    @Override
-//    public String toString() {
-//        return "NFA{" +
-//                "startStatus=" + startStatus +
-//                ", finalStatus=" + finalStatus +
-//                '}';
-//    }
-
     public static void main(String[] args) {
-        NFA nfa = new NFA("a(ab)+");
-        System.out.println(nfa.match("aab"));
+        FA nfa = new NFA("a\\");
+        System.out.println(nfa.match("a"));
     }
 }
