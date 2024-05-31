@@ -10,8 +10,8 @@ public class Arith extends Op{
         if (type == null) error("type error");
     }
 
-    private void error(String typeError) {
-        throw new Error(typeError);
+    public void error(String booleanRequiredInDo) {
+        super.error(booleanRequiredInDo);
     }
 
     public Expr gen() {

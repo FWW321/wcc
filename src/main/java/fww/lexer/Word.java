@@ -1,5 +1,7 @@
 package fww.lexer;
 
+import fww.symbols.Type;
+
 public class Word extends Token {
     public String lexeme = "";
 
@@ -27,5 +29,6 @@ public class Word extends Token {
         Else = new Word(Tag.ELSE, "else"),
         While = new Word(Tag.WHILE, "while"),
         Do = new Word(Tag.DO, "do"),
-        Break = new Word(Tag.BREAK, "break");
+        Break = new Word(Tag.BREAK, "break"),
+        EOF = new Word(Tag.EOF, "EOF");
 }

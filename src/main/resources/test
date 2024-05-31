@@ -1,0 +1,18 @@
+{
+int i; int j; float v; float x; float[100] a;
+while (true) {
+    i = 0;
+    j = 0;
+  while (i < 100) {
+    a[i] = v;
+    i = i + 1;
+  }
+  i = 0;
+  while (i < 100) {
+    x = a[i];
+    j = j + 1;
+    i = i + 1;
+    break;
+  }
+}
+}

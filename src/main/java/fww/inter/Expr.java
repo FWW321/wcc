@@ -6,6 +6,7 @@ import fww.symbols.Type;
 public class Expr {
     public Token op;
     public Type type;
+    static public int labels = 0;
 
     Expr(Token tok, Type p) {
         op = tok;
@@ -47,5 +48,13 @@ public class Expr {
 
     public void error(String booleanRequiredInDo) {
         throw new Error(booleanRequiredInDo);
+    }
+
+    public int newlabel() {
+        return ++labels;
+    }
+
+    public void emitlabel(int i) {
+        System.out.println("L" + i + ":");
     }
 }

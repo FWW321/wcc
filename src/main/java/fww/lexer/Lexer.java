@@ -2,15 +2,24 @@ package fww.lexer;
 
 import fww.symbols.Type;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Hashtable;
 
 public class Lexer {
+    private FileInputStream inputStream;
+    
     public static int line = 1;
 
     public char peek = ' ';
 
     Hashtable<String, Word> words = new Hashtable<>();
+
+    public Lexer(String filePath) throws FileNotFoundException {
+        this();
+        this.inputStream = new FileInputStream(filePath);
+    }
 
     void reserve(Word w) {
         words.put(w.lexeme, w);
@@ -24,6 +33,7 @@ public class Lexer {
         reserve(Word.True);
         reserve(Word.False);
         reserve(Word.Break);
+        reserve(Word.EOF);
 
         reserve(Type.Int);
         reserve(Type.Char);
@@ -31,11 +41,11 @@ public class Lexer {
         reserve(Type.Float);
     }
 
-    void readch() throws IOException {
-        peek = (char) System.in.read();
+    private void readch() throws IOException {
+        peek = (char) inputStream.read();
     }
 
-    boolean readch(char c) throws IOException {
+    private boolean readch(char c) throws IOException {
         readch();
         if (peek != c) {
             return false;
@@ -49,7 +59,7 @@ public class Lexer {
             if (peek == ' ' || peek == '\t') {
                 continue;
             } else if (peek == '\n') {
-                line = line + 1;
+                line++;
             } else {
                 break;
             }
@@ -141,3 +151,4 @@ public class Lexer {
         return tok;
     }
 }
+
