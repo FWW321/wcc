@@ -9,9 +9,9 @@ import java.io.FileNotFoundException;
 // 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
 public class Main {
     public static void main(String[] args) {
-        Lexer lexer = null;
+        Lexer lexer;
         try {
-            lexer = new Lexer("/home/fww/IdeaProjects/wcc/src/main/resources/test");
+            lexer = new Lexer("src/main/resources/test");
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

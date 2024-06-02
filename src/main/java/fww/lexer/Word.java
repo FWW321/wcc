@@ -30,5 +30,7 @@ public class Word extends Token {
         While = new Word(Tag.WHILE, "while"),
         Do = new Word(Tag.DO, "do"),
         Break = new Word(Tag.BREAK, "break"),
-        EOF = new Word(Tag.EOF, "EOF");
+        EOF = new Word(Tag.EOF, "EOF"),
+        NIL = new Word(Tag.NIL, "ε"),
+        ID = new Word(Tag.ID, "id");
 }

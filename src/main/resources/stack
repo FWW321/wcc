@@ -1,0 +1,42 @@
+当前栈[￿, Program]    下一个token: {      产生式：Program->Block
+当前栈[￿, Block]    下一个token: {      下一步产生式：Block->{Decls Stmts}
+当前栈[￿, }, Stmts, Decls, {]    下一个token: {
+当前栈[￿, }, Stmts, Decls]    下一个token: int      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: int      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: int      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: ;      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: int      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: ;      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: float      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: float      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls, Decl, Type, id]    下一个token: ;      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: float      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: float      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls, Decl, Type, id]    下一个token: ;      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: float      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: float      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls, Decl, Type, id]    下一个token: [      下一步产生式：Dims->[[ num ] Dims
+当前栈[￿, }, Stmts, Decls, Decl, Type, id, Dims]    下一个token: [      下一步产生式：Dims->[[ num ] Dims
+当前栈[￿, }, Stmts, Decls, Decl, Type, id, Dims, [, num]    下一个token: ]      下一步产生式：Dims->[[ num ] Dims
+当前栈[￿, }, Stmts, Decls, Decl, Type, id, Dims]    下一个token: ]      下一步产生式：Dims->[[ num ] Dims
+当前栈[￿, }, Stmts, Decls]    下一个token: float      下一步产生式：Decls->Decl Decls
+当前栈[￿, }, Stmts, Decls, Decl]    下一个token: float      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls, Decl, Type, id]    下一个token: ;      下一步产生式：Decl->Type id;
+当前栈[￿, }, Stmts, Decls]    下一个token: ￿      下一步产生式：Decls->ε
+当前栈[￿, }, Stmts]    下一个token: while      下一步产生式：Stmts->Stmt Seq
+当前栈[￿, }, Seq]    下一个token: while      下一步产生式：Seq->Stmt Seq
+当前栈[￿, }, Seq, Stmt]    下一个token: while      下一步产生式：Stmt->while ( Bool ) Stmt
+当前栈[￿, }, Seq, Stmt, while]    下一个token: (      下一步产生式：(->(
+当前栈[￿, }, Seq, Stmt, while, (]    下一个token: true      下一步产生式：Bool->Join Bool'
+当前栈[￿, }, Seq, Stmt, while, Bool, Join]    下一个token: true      下一步产生式：Join->true
+当前栈[￿, }, Seq, Stmt, while, Bool]    下一个token: true      下一步产生式：Bool'->ε
+当前栈[￿, }, Seq, Stmt, while]    下一个token: true      下一步产生式：Bool'->ε
+当前栈[￿, }, Seq, Stmt, while]    下一个token: )      下一步产生式：)->)
+当前栈[￿, }, Seq, Stmt]    下一个token: {      下一步产生式：Stmt->Block
+当前栈[￿, }, Seq, Stmt, Block]    下一个token: {      下一步产生式：Block->{ Decls Stmts }
+当前栈[￿, }, Seq, Stmt, Block]    下一个token: }      下一步产生式：}->}
+当前栈[￿, }, Seq, Stmt]    下一个token: }      下一步产生式：}->}
+当前栈[￿, }, Seq]    下一个token: }      下一步产生式：}->}
+当前栈[￿, }]    下一个token: ￿      下一步产生式：Seq->ε
+当前栈[￿, }]    下一个token: ￿      下一步产生式：Seq->ε
+当前栈[￿]    下一个token: ￿      下一步产生式：Program->Block

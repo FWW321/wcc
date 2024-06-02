@@ -1,6 +1,7 @@
 package fww.lexer;
 
 import fww.symbols.Type;
+import fww.tool.GrammarAnalysis;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +22,10 @@ public class Lexer {
         this.inputStream = new FileInputStream(filePath);
     }
 
+    public Hashtable<String, Word> getWords() {
+        return words;
+    }
+
     void reserve(Word w) {
         words.put(w.lexeme, w);
     }
@@ -34,6 +39,8 @@ public class Lexer {
         reserve(Word.False);
         reserve(Word.Break);
         reserve(Word.EOF);
+        reserve(Word.NIL);
+        reserve(Word.ID);
 
         reserve(Type.Int);
         reserve(Type.Char);
@@ -56,7 +63,7 @@ public class Lexer {
 
     public Token scan() throws IOException {
         for (;; readch()) {
-            if (peek == ' ' || peek == '\t') {
+            if (peek == ' ' || peek == '\t' || peek == '\r') {
                 continue;
             } else if (peek == '\n') {
                 line++;

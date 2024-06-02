@@ -12,13 +12,14 @@ import java.io.IOException;
 import java.util.Stack;
 
 public class Parser {
-    private Lexer lex;
+    private final Lexer lex;
     private Token look;
     Env top = null;
     int used = 0;
+    Stack<String> stack = new Stack<>();
 
     public Parser(Lexer l) throws IOException {
-        clearFile("/home/fww/IdeaProjects/wcc/src/main/resources/token");
+        clearFile("src/main/resources/token");
         lex = l;
         move();
     }
@@ -27,17 +28,17 @@ public class Parser {
         look = lex.scan();
         if(look.tag != Tag.ID){
             String output = "<" + look.tag + "," + look + ">";
-            writeToFile(output, "/home/fww/IdeaProjects/wcc/src/main/resources/token");
+            writeToFile(output);
         }
     }
 
     public void clearFile(String filePath) throws IOException {
-        try (FileWriter writer = new FileWriter(filePath)) {
+        try (FileWriter _ = new FileWriter(filePath)) {
         }
     }
 
-    private void writeToFile(String content, String filePath) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+    private void writeToFile(String content) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/token", true))) {
             writer.write(content);
             writer.newLine();
         }
@@ -47,6 +48,14 @@ public class Parser {
         throw new Error("near line " + Lexer.line + ": " + s);
     }
     
+//    void match(int t) throws IOException {
+//        if (look.tag == t) {
+//            move();
+//        } else {
+//            error("syntax error");
+//        }
+//    }
+
     void match(int t) throws IOException {
         if (look.tag == t) {
             move();
@@ -54,6 +63,7 @@ public class Parser {
             error("syntax error");
         }
     }
+
 
     public void program() throws IOException {
         Stmt s = block();
@@ -84,7 +94,7 @@ public class Parser {
             Id id = new Id((Word) tok, p, used);
             top.put(tok, id);
             String output = "<" + tok.tag + "," + "<" + "var" + "," + id.hashCode() + "," + tok + ">" + ">";
-            writeToFile(output, "/home/fww/IdeaProjects/wcc/src/main/resources/token");
+            writeToFile(output);
             used = used + p.width;
         }
     }
@@ -185,7 +195,7 @@ public class Parser {
             error(t.toString() + " undeclared");
         }
         String output = "<" + "var" + "," + id.hashCode() + "," + t + ">" ;
-        writeToFile(output, "/home/fww/IdeaProjects/wcc/src/main/resources/token");
+        writeToFile(output);
         if (look.tag == '=') {
             move();
             stmt = new Set(id, bool());
@@ -343,4 +353,5 @@ public class Parser {
         }
         return new Access(a, loc, type);
     }
+
 }
